@@ -1,0 +1,15 @@
+{% extends 'home.html' %}
+
+{% block container %}
+<div>
+    <h4>{{ full_name(product) }}</h4>
+    <h2>{{ product['name'] }}</h2>
+    <small>{{ product['category'] }}</small>
+    <div>
+        <h2>
+            <small>{{ product['price'] | format_currency  }}</small>
+        </h2>
+    </div>
+
+</div>
+{% endblock %}
