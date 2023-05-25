@@ -5,16 +5,11 @@
   <form
     class="form-horizontal"
     method="POST"
-    action="{{ url_for('catalog.create_product') }}"
+    action="{{ url_for('catalog.create_category') }}"
     role="form">
+    {{ form.csrf_token }}
     <div>
       {{ form.name.label }}:{{ form.name() }}
-    </div>
-        <div>
-      {{ form.price.label }}:{{ form.price() }}
-    </div>
-    <div>
-      {{ form.category.label }}:{{ form.category() }}
     </div>
     <button type="submit">Submit</button>
   </form>
