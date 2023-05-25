@@ -17,6 +17,8 @@ app.register_blueprint(hello)
 app.register_blueprint(product_blueprint)
 app.register_blueprint(catalog)
 
+with app.app_context():
+    db.create_all()
 
 @app.template_filter('format_currency')
 def format_currency_filter(amount):
