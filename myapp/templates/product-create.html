@@ -1,0 +1,31 @@
+{% extends 'home.html %]
+
+{% block container %}
+<div>
+  <form
+    class="form-horizontal"
+    method="POST"
+    action="{{ url_for('catalog.create_product') }}"
+    role="form">
+    <div>
+      <label for="name">Name</label>
+      <div>
+        <input type="text" id="name" name="name">
+      </div>
+    </div>
+       <div>
+      <label for="price">Price</label>
+      <div>
+        <input type="number" id="price" name="price">
+      </div>
+    </div>
+       <div>
+      <label for="category">Category</label>
+      <div>
+        <input type="text" id="category" name="category">
+      </div>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+{% endblock %}

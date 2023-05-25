@@ -2,13 +2,21 @@
 
 {% block container %}
 <div>
-    {% for id, product in products.items() %}
     <div>
         <h2>
-            <a href="{{ url_for('product.product', key=id) }}">{{ product['name'] }}</a>
-            <small>{{ product['price'] }}</small>
+            <a href="{{ url_for('catalog.products') }}" id="catalog_link">
+                Kliknij żeby wejść do katalogu
+            </a>
         </h2>
     </div>
-    {% endfor %}
 </div>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+    $.getJSON("/katalog",function(data){
+        $('#catalog_link').append('<span> + data.count + </span>');
+        });
+    });
+</script>
 {% endblock %}
