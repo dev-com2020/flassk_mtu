@@ -15,7 +15,7 @@
 <script>
     $(document).ready(function(){
     $.getJSON("/katalog",function(data){
-        $('#catalog_link').append('<span> + data.count + </span>');
+        $('#catalog_link').append('<span>' + data.count + '</span>');
         });
     });
 </script>

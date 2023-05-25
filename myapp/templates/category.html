@@ -1,0 +1,12 @@
+{% extends 'home.html' %}
+
+{% block container %}
+<div>
+    <h2>{{ category.name }}</h2>
+    <div>
+        {% for product in category.products %}
+        {{ product.name }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

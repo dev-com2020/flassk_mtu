@@ -7,6 +7,7 @@ from myapp.product.views import product_blueprint
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
+app.secret_key = 'some_random_key'
 
 db = SQLAlchemy(app)
 

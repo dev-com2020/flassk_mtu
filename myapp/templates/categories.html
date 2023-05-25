@@ -1,0 +1,11 @@
+{% extends 'home.html' %}
+
+{% block container %}
+<div>
+    {% for category in categories %}
+    <div>
+        <a href="{{ url_for('catalog.category', id=category.id) }}">{{ category.name }}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

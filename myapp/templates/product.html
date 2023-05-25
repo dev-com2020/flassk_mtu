@@ -1,14 +1,7 @@
 {% extends 'home.html' %}
 
-
 {% block container %}
 <div>
     <h2>{{ product.name }}</h2>
-    <small>{{ product.category.name }}</small>
-    <div>
-        <h2>
-            <small>{{ product.price | format_currency  }}</small>
-        </h2>
-    </div>
 </div>
 {% endblock %}

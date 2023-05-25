@@ -29,29 +29,26 @@ def page_not_found(e):
 
 @catalog.route('/')
 @catalog.route('/katalog')
-# @template_or_json('home.html')
 def home():
     if request.is_json:
         products = Product.query.all()
         return jsonify({
             'count': len(products)
         })
-    # products = Product.query.all()
-    # return {'count': len(products)}
     return render_template('home.html')
-
-
-@catalog.route('/products')
-@catalog.route('/products/<int:page>')
-def products():
-    products = Product.query.paginate(page=1, max_per_page=10)
-    return render_template('products.html', products=products)
-
 
 @catalog.route('/product/<id>')
 def product(id):
     product = Product.query.get_or_404(id)
     return render_template('product.html', product=product)
+
+
+@catalog.route('/products')
+@catalog.route('/products/<int:page>')
+def products(page=1):
+    products = Product.query.paginate(page=page, max_per_page=3)
+    return render_template('products.html', products=products)
+
 
 
 @catalog.route('/product-create', methods=['POST', 'GET'])
@@ -77,20 +74,16 @@ def create_category():
     category = Category(name)
     db.session.add(category)
     db.session.commit()
-    return 'Category created'
+    return render_template('category.html', category=category)
+
+
+@catalog.route('/category/<id>')
+def category(id):
+    category = Category.query.get_or_404(id)
+    return render_template('category.html', category=category)
 
 
 @catalog.route('/categories')
 def categories():
     categories = Category.query.all()
-    res = {}
-    for category in categories:
-        res[category.id] = {
-            'name': category.name
-        }
-        for product in category.products:
-            res[category.id]['products'] = {
-                'id': product.id,
-                'name': product.name,
-                'price': product.price
-            }
+    return render_template('categories.html', categories=categories)
