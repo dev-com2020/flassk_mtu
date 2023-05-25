@@ -1,4 +1,5 @@
 {% extends 'home.html' %}
+{% from '_helpers.html' import render_field %}
 
 {% block container %}
 <div>
@@ -9,6 +10,10 @@
         <h2>
             <small>{{ product['price'] | format_currency  }}</small>
         </h2>
+        <fieldset>
+            {{ render_field('username', 'icon-user') }}
+            {{ render_field('password', 'icon-key', type='password') }}
+        </fieldset>
     </div>
 
 </div>
