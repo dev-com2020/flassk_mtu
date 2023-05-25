@@ -2,7 +2,6 @@ import ccy as ccy
 from flask import Flask, request
 from myapp.hello.views import hello
 from flask_sqlalchemy import SQLAlchemy
-from myapp.product.views import product_blueprint
 
 
 app = Flask(__name__)
@@ -15,7 +14,6 @@ db = SQLAlchemy(app)
 from myapp.catalog.views import catalog
 
 app.register_blueprint(hello)
-app.register_blueprint(product_blueprint)
 app.register_blueprint(catalog)
 
 with app.app_context():
