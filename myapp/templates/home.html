@@ -2,12 +2,19 @@
 
 {% block container %}
 <div>
+    {% if current_user.is_authenticated %}
+    <h3>Witaj {{ current_user.username }}</h3>
+    <a href="{{ url_for('auth.logout') }}">Click here to logout</a>
     <div>
         <h2>
             <a href="{{ url_for('catalog.products') }}" id="catalog_link">
                 Kliknij żeby wejść do katalogu
             </a>
         </h2>
+        {% else %}
+        Click here to <a href="{{ url_for('auth.login') }}">login</a>or
+        <a href="{{ url_for('auth.register') }}">register</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

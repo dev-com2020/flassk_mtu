@@ -1,0 +1,15 @@
+{% extends 'home.html' %}
+
+{% block container %}
+<div class="">
+    <form method="POST"
+          action="{{ url_for('auth.register') }}"
+          role="form">
+        {{ form.csrf_token }}
+        <div>{{ form.username.label }}: {{ form.username() }}</div>
+        <div>{{ form.password.label }}: {{ form.password() }}</div>
+        <div>{{ form.confirm.label }}: {{ form.confirm() }}</div>
+        <button type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}

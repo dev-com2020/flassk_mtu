@@ -7,7 +7,7 @@
     method="POST"
     action="{{ url_for('catalog.create_product') }}"
     role="form">
-    <div>
+    <div>{{ form.csrf_token }}
       {{ form.name.label }}:{{ form.name() }}
     </div>
         <div>
