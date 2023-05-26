@@ -1,10 +1,21 @@
-from flask import Blueprint, render_template, session, flash, redirect, url_for, request
+from flask import Blueprint, render_template, session, flash, redirect, url_for, request, g
+from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 
-from myapp import db
+from myapp import db, app
 from myapp.auth.models import RegistrationForm, User, LoginForm
 
 auth = Blueprint('auth', __name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
 
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+@auth.before_request
+def get_current_user():
+    g.user = current_user
 
 @auth.route('/')
 @auth.route('/home')
@@ -35,18 +46,24 @@ def register():
     return render_template('register.html', form=form)
 
 
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('auth.home'))
     form = LoginForm()
 
     if form.validate_on_submit():
         username = request.form.get('username')
         password = request.form.get('password')
         existing_username = User.query.filter_by(username=username).first()
+
         if not (existing_username and existing_username.check_password(password)):
             flash("Niepoprawne dane logowanie")
             return render_template('login.html', form=form)
-        session['username'] = username
+
+        login_user(existing_username)
+
         return redirect(url_for('auth.home'))
     if form.errors:
         flash(form.errors, 'danger')
@@ -54,8 +71,8 @@ def login():
 
 
 @auth.route('/logout')
+@login_required
 def logout():
-    if 'username' in session:
-        session.pop('username')
-        flash("Jesteś wylogowany")
+    logout_user()
+    flash("Jesteś wylogowany")
     return redirect(url_for('auth.home'))

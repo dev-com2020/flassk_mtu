@@ -41,8 +41,6 @@ class NameForm(FlaskForm):
     name = StringField('Name', validators=[InputRequired()])
 
 
-
-
 class CustomCategoryInput(Select):
     def __call__(self, field, **kwargs):
         html = []

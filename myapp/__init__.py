@@ -1,8 +1,6 @@
 import ccy as ccy
 from flask import Flask, request
-from myapp.hello.views import hello
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
@@ -12,20 +10,17 @@ app.config['LDAP_PROVIDER_URL'] = 'ldap://localhost'
 
 db = SQLAlchemy(app)
 
-from myapp.catalog.views import catalog
+# from myapp.catalog.views import catalog
 from myapp.auth.views import auth
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'auth.login'
 
 # def get_ldap_connection():
     # conn = ldap.initialize(app.config['LDAP_PROVIDER_URL'])
     # return conn
 
 
-app.register_blueprint(hello)
-app.register_blueprint(catalog)
+# app.register_blueprint(hello)
+# app.register_blueprint(catalog)
 app.register_blueprint(auth)
 
 with app.app_context():

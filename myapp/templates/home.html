@@ -7,23 +7,12 @@
     <a href="{{ url_for('auth.logout') }}">Click here to logout</a>
     <div>
         <h2>
-            <a href="{{ url_for('catalog.products') }}" id="catalog_link">
                 Kliknij żeby wejść do katalogu
-            </a>
         </h2>
         {% else %}
-        Click here to <a href="{{ url_for('auth.login') }}">login</a>or
-        <a href="{{ url_for('auth.register') }}">register</a>
+        Click here to <a href="{{ url_for('auth.login') }}"> login </a> or
+        <a href="{{ url_for('auth.register') }}"> register </a>
         {% endif %}
     </div>
 </div>
-{% endblock %}
-{% block scripts %}
-<script>
-    $(document).ready(function(){
-    $.getJSON("/katalog",function(data){
-        $('#catalog_link').append('<span>' + data.count + '</span>');
-        });
-    });
-</script>
 {% endblock %}

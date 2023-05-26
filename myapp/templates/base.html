@@ -7,22 +7,6 @@
     <title>Title</title>
 </head>
 <body>
-<div>
-    <div>
-        <div>
-            <a href="{{ url_for('catalog.home') }}">Produkty</a>
-        </div>
-                <div>
-            <a href="{{ url_for('catalog.categories') }}">Kategorie</a>
-        </div>
-        {% for category, message in get_flashed_messages(with_categories=true) %}
-        <div class="alert alert-{{ category }} alert-dismissable">
-            <button type="button">&times;</button>
-            {{ message }}
-        </div>
-        {% endfor %}
-    </div>
-</div>
 <div class="container">
     {% block container %}{% endblock %}
 </div>

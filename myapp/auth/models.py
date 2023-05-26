@@ -1,3 +1,4 @@
+
 from flask_wtf import FlaskForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms import PasswordField, StringField
@@ -27,11 +28,11 @@ class User(db.Model):
         return True
 
     @property
-    def is_anonymus(self):
+    def is_anonymous(self):
         return False
 
     def get_id(self):
-        return str(self.id)
+        return int(self.id)
 
 
 class RegistrationForm(FlaskForm):
